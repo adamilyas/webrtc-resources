@@ -6,9 +6,8 @@ Based on
 
 # Sequence
 
-A: offers and produces `sdp1`
-B: set `sdp1` as remote desc
-B: answers and produces `sdp2`
-A: set `sdp2` as remote desc
-
-A: Add B as ice candidate OR B: Add A as ice candidate
+1. A: offers and produces `sdp1`
+2. B: set `sdp1` as remote desc
+3. B: answers and produces `sdp2`
+4. A: set `sdp2` as remote desc
+5. A: Add B as ice candidate OR B: Add A as ice candidate
