@@ -1,0 +1,31 @@
+.videoContainer {
+	flex-direction: row;
+	display: flex;
+	width: 100%;
+}
+
+.videoRowContainer {
+}
+
+.video {
+	width: 80%;
+	background-color: black;
+}
+
+.panel {
+	width: 60%;
+	flex-direction: column;
+	display: flex;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+button {
+	padding: 10px 6px;
+	border-radius: 5px;
+}
+
+textarea {
+	height: 100px;
+}

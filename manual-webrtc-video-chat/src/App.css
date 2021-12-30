@@ -1,0 +1,17 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	height: 100%;
+	width: 100%;
+	color: #bcb8b2;
+	background-color: #252828;
+}
+
+.container {
+	/* TRBL */
+	padding: 60px 60px;
+	height: 100%;
+}
