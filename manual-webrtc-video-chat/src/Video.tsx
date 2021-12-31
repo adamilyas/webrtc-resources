@@ -9,12 +9,42 @@ import React, {
 
 import "./Video.css";
 
-const config = undefined;
+const initConnection = (
+	config: RTCConfiguration | undefined,
+	remoteVideoRef: React.RefObject<HTMLVideoElement>
+): RTCPeerConnection => {
+	const pc = new RTCPeerConnection(config);
+
+	pc.onicecandidate = (e) => {
+		if (e.candidate) {
+			console.log("onicecandidate");
+			console.log(JSON.stringify(e.candidate));
+		}
+	};
+
+	pc.oniceconnectionstatechange = (e) => {
+		console.log("oniceconnectionstatechange", e);
+	};
+
+	pc.ontrack = (e: RTCTrackEvent) => {
+		console.log("onTrack");
+		console.log(e.streams);
+
+		if (remoteVideoRef.current) {
+			console.log("adding to remote video ref");
+			remoteVideoRef.current.srcObject = e.streams[0];
+		}
+	};
+
+	return pc;
+};
 
 const Video: React.FC = () => {
 	const localVideoRef = createRef<HTMLVideoElement>();
 	const remoteVideoRef = createRef<HTMLVideoElement>();
-	const [connection, setConnection] = useState(new RTCPeerConnection(config));
+	const [connection, setConnection] = useState(
+		initConnection(undefined, remoteVideoRef)
+	);
 
 	const textRef =
 		useRef<HTMLTextAreaElement>() as React.MutableRefObject<HTMLTextAreaElement>;
@@ -42,29 +72,6 @@ const Video: React.FC = () => {
 			if (!success) {
 				return;
 			}
-
-			const pc = connection;
-
-			pc.onicecandidate = (e) => {
-				if (e.candidate) {
-					console.log("onicecandidate");
-					console.log(JSON.stringify(e.candidate));
-				}
-			};
-
-			pc.oniceconnectionstatechange = (e) => {
-				console.log("oniceconnectionstatechange", e);
-			};
-
-			pc.ontrack = (e) => {
-				console.log("onTrack");
-				console.log(e.streams);
-
-				if (remoteVideoRef.current) {
-					console.log("adding to remote video ref");
-					remoteVideoRef.current.srcObject = e.streams[0];
-				}
-			};
 		}
 
 		getUserMedia();
