@@ -68,10 +68,6 @@ const Video: React.FC = () => {
 				.catch((err) => {
 					console.log("getUserMedia Error", err);
 				});
-
-			if (!success) {
-				return;
-			}
 		}
 
 		getUserMedia();
